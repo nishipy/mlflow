@@ -41,6 +41,9 @@ jobs:
       run: |
         source ./dev/install-common-deps.sh
         pip install -r requirements/lint-requirements.txt
+    - name: Add problem matchers
+      run: |
+        echo "::add-matcher::.github/workflows/matchers/pylint.json"
     - name: Test custom pylint-plugins
       run : |
         pytest tests/pylint_plugins
