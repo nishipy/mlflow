@@ -34,6 +34,9 @@ jobs:
       with:
         python-version: "3.7"
     - uses: ./.github/actions/cache-pip
+    - name: Add problem matchers
+      run: |
+        echo "::add-matcher::.github/workflows/matchers/pylint.json"
     - name: Install dependencies
       env:
         INSTALL_LARGE_PYTHON_DEPS: true
@@ -41,9 +44,6 @@ jobs:
       run: |
         source ./dev/install-common-deps.sh
         pip install -r requirements/lint-requirements.txt
-    - name: Add problem matchers
-      run: |
-        echo "::add-matcher::.github/workflows/matchers/pylint.json"
     - name: Test custom pylint-plugins
       run : |
         pytest tests/pylint_plugins
